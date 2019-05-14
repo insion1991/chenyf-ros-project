@@ -99,27 +99,46 @@ class SlamGMapping
     double computePoseEntropy();
     
     // Parameters used by GMapping
+    //激光雷达的最大距离和最大使用距离
     double maxRange_;
     double maxUrange_;
+
     double maxrange_;
+
+    /*scan-matching结果接受的最小得分*/
     double minimum_score_;
     double sigma_;
     int kernelSize_;
+
+    //scan-matching的过程中的初始的搜索步长和迭代次数
     double lstep_;
     double astep_;
     int iterations_;
+
+    //计算在likelihoodandscore()函数中 计算likelihood使用用的方差(不是标准差)
+    //likelihood是指高斯分布的指数项的系数，即e的指数
     double lsigma_;
     double ogain_;
+
+    /*对于一帧激光雷达数据来说 只取每第(n+1)个激光束  这个是相对于scan-match来说的。
+如果n等于0 则取每第1帧激光束
+如果n等于1 则取每第2帧激光束 也就是说使用的激光束变成原来的1/2
+如果n等于2 则取每第3帧激光束 也就是说使用的激光束变成原来的1/3*/
     int lskip_;
+/*机器人的运动模型的相关的噪声参数*/
     double srr_;
     double srt_;
     double str_;
     double stt_;
+/*进行滤波器更新的最小距离*/
     double linearUpdate_;
     double angularUpdate_;
+
+    /*粒子滤波器的相关参数*/
     double temporalUpdate_;
     double resampleThreshold_;
     int particles_;
+    /*初始时候地图的维度和分辨率*/
     double xmin_;
     double ymin_;
     double xmax_;
